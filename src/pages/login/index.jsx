@@ -24,8 +24,6 @@ const Input = forwardRef((props, ref) => {
 });
 
 export const Login = () => {
-  const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
 
   const error = useRef("");
@@ -59,7 +57,7 @@ export const Login = () => {
 
       if (areRightCreds) {
         sessionStorage["user"] = JSON.stringify(userDetails);
-        setUser(sessionStorage.getItem("user"));
+        setUser(userDetails);
       }
 
       if (!areRightCreds) {
@@ -71,10 +69,6 @@ export const Login = () => {
     }
     setLoading(false);
   };
-
-  useEffect(() => {
-    console.log(error.current);
-  }, [loading]);
 
   const usernameRef = useRef();
   const passwordRef = useRef();

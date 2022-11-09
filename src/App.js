@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { Dashboard, Login } from "./pages";
 import { useEffect } from "react";
 import { useUser } from "./contexts";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   const navigate = useNavigate();
@@ -21,7 +22,14 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
