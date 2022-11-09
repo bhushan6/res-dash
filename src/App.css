@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Space+Mono:wght@400;700&family=Tomorrow:wght@600&display=swap");
+
+:root {
+  --black: #3a3a3a;
+  --white: #ffffff;
+  --blue: #3361ff;
+  --gray: #aaaaaa;
+  --border-radius: 6px;
+}
+
+*,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+::placeholder {
+  color: var(--gray);
+  text-transform: capitalize;
+}
