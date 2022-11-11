@@ -15,6 +15,8 @@ export const RestaurantGoogleChart = ({ id, bookmarked }) => {
 
   const item = listOfRes[id];
 
+  if (!item) return <></>;
+
   const handleBookmarks = () => {
     if (bookmarked) {
       setBookmark((currentState) => {

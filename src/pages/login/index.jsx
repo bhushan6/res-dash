@@ -1,28 +1,8 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../../components";
 import { useUser } from "../../contexts/AuthContext";
 import { Axios } from "../../utils/helpers";
-
-export const Input = forwardRef((props, ref) => {
-  const extraStyles = props.style ? props.style : {};
-
-  return (
-    <input
-      ref={ref}
-      {...props}
-      style={{
-        width: "100%",
-        borderRadius: "var(--border-radius)",
-        padding: "0.7rem 1.5rem",
-        background: "var(--white)",
-        border: "1px solid rgba(0, 0, 0, 0.2)",
-        ...extraStyles,
-      }}
-    >
-      {props.children}
-    </input>
-  );
-});
 
 export const Login = () => {
   const [loading, setLoading] = useState(false);

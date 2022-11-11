@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { RestaurantGoogleChart, RestaurantItem } from "../../../components";
+import {
+  Input,
+  RestaurantGoogleChart,
+  RestaurantItem,
+} from "../../../components";
 import { useRestaurantList, useAddedRestaurant } from "../../../contexts";
 import { Axios, searchIcon, closeIcon } from "../../../utils/helpers";
-import { Input } from "../../login";
 
 export const Home = () => {
   const [listOfRes, setListOfRes] = useRestaurantList();

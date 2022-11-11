@@ -1,8 +1,12 @@
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 
 export const Iframe = memo(({ name }) => {
+  const ref = useRef();
+
   return (
     <iframe
+      loading="lazy"
+      ref={ref}
       title={`${name}'s google chart`}
       width={window.innerWidth / 2}
       height="350"
