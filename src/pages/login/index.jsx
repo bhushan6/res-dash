@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/AuthContext";
 import { Axios } from "../../utils/helpers";
 
-const Input = forwardRef((props, ref) => {
+export const Input = forwardRef((props, ref) => {
   const extraStyles = props.style ? props.style : {};
 
   return (
@@ -12,14 +12,15 @@ const Input = forwardRef((props, ref) => {
       {...props}
       style={{
         width: "100%",
-        boxShadow: "4px 6px 15px 0px #0000000",
         borderRadius: "var(--border-radius)",
         padding: "0.7rem 1.5rem",
         background: "var(--white)",
-        border: "2px solid var(--black)",
+        border: "1px solid rgba(0, 0, 0, 0.2)",
         ...extraStyles,
       }}
-    />
+    >
+      {props.children}
+    </input>
   );
 });
 
@@ -28,7 +29,13 @@ export const Login = () => {
 
   const error = useRef("");
 
-  const [, setUser] = useUser();
+  const [user, setUser] = useUser();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate("/dashboard/home");
+  }, [user, navigate]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -58,6 +65,7 @@ export const Login = () => {
       if (areRightCreds) {
         sessionStorage["user"] = JSON.stringify(userDetails);
         setUser(userDetails);
+        navigate("/dashboard/home");
       }
 
       if (!areRightCreds) {

@@ -4,6 +4,7 @@
   --black: #3a3a3a;
   --white: #ffffff;
   --blue: #3361ff;
+  --secondary-blue: #eff6ff;
   --gray: #aaaaaa;
   --border-radius: 6px;
 }
@@ -24,4 +25,9 @@ input {
 ::placeholder {
   color: var(--gray);
   text-transform: capitalize;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
 }
