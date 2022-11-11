@@ -8,7 +8,15 @@ export const Bookmarks = () => {
   return (
     <div>
       <h1 style={{ marginBottom: "1rem" }}>Bookmarks</h1>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "start",
+          flexDirection: "column",
+          gap: "1rem",
+          paddingTop: "2rem",
+        }}
+      >
         {bookmarks.map((bookmark) => (
           <RestaurantGoogleChart
             key={bookmark.id}

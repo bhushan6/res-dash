@@ -52,31 +52,45 @@ export const RestaurantGoogleChart = ({ id, bookmarked }) => {
       >
         <div
           style={{
-            padding: "0.5rem 0",
+            padding: "1rem 1.5rem",
             display: "flex",
-            justifyContent: "end",
+            justifyContent: "space-between",
             gap: "15px",
             alignItems: "center",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+            marginBottom: "0.5rem",
           }}
         >
-          <span
+          <div>
+            <h1>{item.fields.Name} </h1>
+          </div>
+          <div
             style={{
-              cursor: "pointer",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "15px",
+              alignItems: "center",
             }}
-            onClick={handleBookmarks}
           >
-            {bookmarked ? starIcon("var(--blue)") : starIcon("var(--gray)")}
-          </span>
-          {!bookmarked && (
             <span
               style={{
                 cursor: "pointer",
               }}
-              onClick={removeFromList}
+              onClick={handleBookmarks}
             >
-              {closeIcon}
+              {bookmarked ? starIcon("var(--blue)") : starIcon("var(--gray)")}
             </span>
-          )}
+            {!bookmarked && (
+              <span
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={removeFromList}
+              >
+                {closeIcon}
+              </span>
+            )}
+          </div>
         </div>
         <Iframe name={item.fields.Name} />
       </div>
