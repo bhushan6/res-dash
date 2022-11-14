@@ -12,6 +12,8 @@ export const Home = () => {
 
   const [searchText, setSearchText] = useState("");
 
+  const keyRef = useRef(Math.random());
+
   const [addedRestaurants] = useAddedRestaurant();
 
   const autoComplete = ({ fields: { Name } }) => {
@@ -23,6 +25,15 @@ export const Home = () => {
   };
 
   const filtredList = Object.values(listOfRes).filter(autoComplete);
+
+  const borderStyle =
+    filtredList.length < 1
+      ? {}
+      : {
+          borderWidth: "0px 1px 1px 1px",
+          borderStyle: "solid",
+          borderColor: "rgba(0, 0, 0, 0.2)",
+        };
 
   useEffect(() => {
     const fetchRes = async () => {
@@ -69,6 +80,7 @@ export const Home = () => {
         }}
       >
         <Input
+          key={keyRef.current}
           onChange={searchRes}
           style={{ paddingRight: "2rem", background: "white" }}
         />
@@ -81,7 +93,10 @@ export const Home = () => {
               transform: "translateY(-40%)",
               cursor: "pointer",
             }}
-            onClick={() => setSearchText("")}
+            onClick={() => {
+              keyRef.current = Math.random();
+              setSearchText("");
+            }}
           >
             {filtredList.length < 1 ? searchIcon : closeIcon}
           </span>
@@ -91,14 +106,12 @@ export const Home = () => {
             position: "absolute",
             width: "100%",
             top: "100%",
-            borderWidth: filtredList.length < 1 ? null : "0px 1px 1px 1px",
-            borderStyle: filtredList.length < 1 ? null : "solid",
-            borderColor: filtredList.length < 1 ? null : "rgba(0, 0, 0, 0.2)",
             transform: "translateY(-3px)",
             borderRadius: "0px 0px var(--border-radius) var(--border-radius)",
             maxHeight: "40vh",
             overflowY: "auto",
             background: "white",
+            ...borderStyle,
           }}
         >
           {filtredList.map((item) => (

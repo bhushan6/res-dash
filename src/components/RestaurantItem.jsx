@@ -1,17 +1,36 @@
 import React, { memo } from "react";
-import { useAddedRestaurant, useRestaurantList } from "../contexts";
+import {
+  useAddedRestaurant,
+  useBookmarks,
+  useRestaurantList,
+} from "../contexts";
 import { addIcon } from "../utils/helpers";
 
 export const RestaurantItem = memo(({ id }) => {
   const [addedRestaurants, setAddedRestaurant] = useAddedRestaurant();
+  const [bookmarkedRestaurants] = useBookmarks();
   const [listOfRes] = useRestaurantList();
 
   const item = listOfRes[id];
 
-  const isAdded = addedRestaurants.filter((res) => res.id === item.id);
+  const checkIfAdded = () => {
+    const addedFilter = addedRestaurants.filter((res) => res.id === item.id);
+
+    if (addedFilter[0]) return addedFilter[0];
+
+    const bookmarkFilter = bookmarkedRestaurants.filter(
+      (res) => res.id === item.id
+    );
+
+    return bookmarkFilter[0];
+  };
+
+  const isAdded = checkIfAdded();
 
   const addRestaurant = () =>
-    !isAdded[0] && setAddedRestaurant((prevState) => [...prevState, item]);
+    !isAdded && setAddedRestaurant((prevState) => [...prevState, item]);
+
+  const addIconSvg = isAdded ? addIcon("var(--gray)") : addIcon();
 
   return (
     <div
@@ -25,11 +44,11 @@ export const RestaurantItem = memo(({ id }) => {
       <div>{item.fields.Name}</div>
       <span
         style={{
-          cursor: "pointer",
+          cursor: isAdded ? "not-allowed" : "pointer",
         }}
         onClick={addRestaurant}
       >
-        {addIcon}
+        {addIconSvg}
       </span>
     </div>
   );

@@ -23,6 +23,8 @@ export const RestaurantGoogleChart = ({ id, bookmarked }) => {
         const newState = currentState.filter((res) => res.id !== item.id);
         return newState;
       });
+
+      setAddedRestaurant((currentState) => [...currentState, item]);
     } else {
       setBookmark((prevState) => [...prevState, item]);
 
