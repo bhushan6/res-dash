@@ -3,16 +3,19 @@ import { AddedRestaurantsCotext } from "./AddedRestaurantsContext";
 import { AuthContext } from "./AuthContext";
 import { BookmarkContext } from "./BookmarkContext";
 import { ListOfResContext } from "./ListOfResContext";
+import { NotificationContext } from "./NotificationContext";
 
 export const Context = ({ children }) => {
   return (
     <>
       <AuthContext>
-        <AddedRestaurantsCotext>
-          <ListOfResContext>
-            <BookmarkContext>{children}</BookmarkContext>
-          </ListOfResContext>
-        </AddedRestaurantsCotext>
+        <NotificationContext>
+          <AddedRestaurantsCotext>
+            <ListOfResContext>
+              <BookmarkContext>{children}</BookmarkContext>
+            </ListOfResContext>
+          </AddedRestaurantsCotext>
+        </NotificationContext>
       </AuthContext>
     </>
   );

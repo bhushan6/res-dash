@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Bookmarks, Dashboard, Home, Login } from "./pages";
 import { useEffect } from "react";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ProtectedRoute, Snackbar } from "./components";
 
 const Redirect = () => {
   const navigate = useNavigate();
@@ -36,6 +36,7 @@ function App() {
           <Route path="bookmark" element={<Bookmarks />} />
         </Route>
       </Routes>
+      <Snackbar />
     </div>
   );
 }

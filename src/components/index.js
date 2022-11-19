@@ -3,3 +3,4 @@ export * from "./RestaurantItem";
 export * from "./RestaurantGoogleChart";
 export * from "./Iframe";
 export * from "./Input";
+export * from "./Snackbar";

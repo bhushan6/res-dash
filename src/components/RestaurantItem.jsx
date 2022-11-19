@@ -2,14 +2,16 @@ import React, { memo } from "react";
 import {
   useAddedRestaurant,
   useBookmarks,
+  useNotifications,
   useRestaurantList,
 } from "../contexts";
-import { addIcon } from "../utils/helpers";
+import { addIcon, SNACKBAR_TYPES } from "../utils/helpers";
 
 export const RestaurantItem = memo(({ id }) => {
   const [addedRestaurants, setAddedRestaurant] = useAddedRestaurant();
   const [bookmarkedRestaurants] = useBookmarks();
   const [listOfRes] = useRestaurantList();
+  const { notify } = useNotifications();
 
   const item = listOfRes[id];
 
@@ -27,8 +29,15 @@ export const RestaurantItem = memo(({ id }) => {
 
   const isAdded = checkIfAdded();
 
-  const addRestaurant = () =>
-    !isAdded && setAddedRestaurant((prevState) => [...prevState, item]);
+  const addRestaurant = () => {
+    if (!isAdded) {
+      setAddedRestaurant((prevState) => [...prevState, item]);
+      notify({
+        message: "Restaurant added to the list",
+        type: SNACKBAR_TYPES.SUCESS,
+      });
+    }
+  };
 
   const addIconSvg = isAdded ? addIcon("var(--gray)") : addIcon();
 

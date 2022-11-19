@@ -3,13 +3,18 @@ import {
   useBookmarks,
   useAddedRestaurant,
   useRestaurantList,
+  useNotifications,
 } from "../contexts";
-import { closeIcon, starIcon } from "../utils/helpers";
+import { closeIcon, SNACKBAR_TYPES, starIcon } from "../utils/helpers";
 import { Iframe } from "./Iframe";
+
+const closeIconEle = closeIcon("var(--gray)");
 
 export const RestaurantGoogleChart = ({ id, bookmarked }) => {
   const [, setBookmark] = useBookmarks();
   const [, setAddedRestaurant] = useAddedRestaurant();
+
+  const { notify } = useNotifications();
 
   const [listOfRes] = useRestaurantList();
 
@@ -25,12 +30,20 @@ export const RestaurantGoogleChart = ({ id, bookmarked }) => {
       });
 
       setAddedRestaurant((currentState) => [...currentState, item]);
+      notify({
+        message: "removed restaurant from bookmarks",
+        type: SNACKBAR_TYPES.SUCESS,
+      });
     } else {
       setBookmark((prevState) => [...prevState, item]);
 
       setAddedRestaurant((currentState) => {
         const newState = currentState.filter((res) => res.id !== item.id);
         return newState;
+      });
+      notify({
+        message: "added restaurant from bookmarks",
+        type: SNACKBAR_TYPES.SUCESS,
       });
     }
   };
@@ -39,6 +52,10 @@ export const RestaurantGoogleChart = ({ id, bookmarked }) => {
     setAddedRestaurant((currentState) => {
       const newState = currentState.filter((res) => res.id !== item.id);
       return newState;
+    });
+    notify({
+      message: "removed restaurant from list",
+      type: SNACKBAR_TYPES.SUCESS,
     });
   };
 
@@ -89,7 +106,7 @@ export const RestaurantGoogleChart = ({ id, bookmarked }) => {
                 }}
                 onClick={removeFromList}
               >
-                {closeIcon}
+                {closeIconEle}
               </span>
             )}
           </div>

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components";
+import { useNotifications } from "../../contexts";
 import { useUser } from "../../contexts/AuthContext";
-import { Axios } from "../../utils/helpers";
+import { Axios, SNACKBAR_TYPES } from "../../utils/helpers";
 
 export const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -12,6 +13,8 @@ export const Login = () => {
   const [user, setUser] = useUser();
 
   const navigate = useNavigate();
+
+  const { notify } = useNotifications();
 
   useEffect(() => {
     if (user) navigate("/dashboard/home");
@@ -43,17 +46,26 @@ export const Login = () => {
       });
 
       if (areRightCreds) {
+        notify({
+          message: `Welcome ${userDetails.username}`,
+          type: SNACKBAR_TYPES.SUCESS,
+        });
         sessionStorage["user"] = JSON.stringify(userDetails);
         setUser(userDetails);
         navigate("/dashboard/home");
       }
 
       if (!areRightCreds) {
+        notify({
+          message: "Please provide the correct credentials",
+          type: SNACKBAR_TYPES.DANGER,
+        });
         error.current = "Password or Username was wrong";
       }
     } catch (err) {
       console.log(err);
       error.current = "error";
+      notify({ message: "Somthing went wrong", type: SNACKBAR_TYPES.DANGER });
     }
     setLoading(false);
   };

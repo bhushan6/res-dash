@@ -7,6 +7,8 @@ import {
 import { useRestaurantList, useAddedRestaurant } from "../../../contexts";
 import { Axios, searchIcon, closeIcon } from "../../../utils/helpers";
 
+const closeIconEle = closeIcon("var(--gray)");
+
 export const Home = () => {
   const [listOfRes, setListOfRes] = useRestaurantList();
 
@@ -98,7 +100,7 @@ export const Home = () => {
               setSearchText("");
             }}
           >
-            {filtredList.length < 1 ? searchIcon : closeIcon}
+            {filtredList.length < 1 ? searchIcon : closeIconEle}
           </span>
         }
         <div

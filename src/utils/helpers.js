@@ -7,6 +7,11 @@ export const Axios = axios.create({
   headers: { Authorization: `Bearer keyfXgn8PL6pB3x32` },
 });
 
+export const SNACKBAR_TYPES = {
+  SUCESS: "#3BBD9F",
+  DANGER: "#FF5158",
+};
+
 export const homeIcon = (
   <svg
     width="16"
@@ -37,7 +42,7 @@ export const searchIcon = (
   </svg>
 );
 
-export const closeIcon = (
+export const closeIcon = (color = "var(--white)") => (
   <svg
     width="14"
     height="14"
@@ -49,7 +54,7 @@ export const closeIcon = (
       fill-rule="evenodd"
       clip-rule="evenodd"
       d="M12.8925 0.802486C12.7057 0.615233 12.452 0.51 12.1875 0.51C11.923 0.51 11.6693 0.615233 11.4825 0.802486L6.5925 5.68249L1.7025 0.792486C1.51567 0.605233 1.26202 0.5 0.9975 0.5C0.732982 0.5 0.479331 0.605233 0.2925 0.792486C-0.0975 1.18249 -0.0975 1.81249 0.2925 2.20249L5.1825 7.09249L0.2925 11.9825C-0.0975 12.3725 -0.0975 13.0025 0.2925 13.3925C0.6825 13.7825 1.3125 13.7825 1.7025 13.3925L6.5925 8.50249L11.4825 13.3925C11.8725 13.7825 12.5025 13.7825 12.8925 13.3925C13.2825 13.0025 13.2825 12.3725 12.8925 11.9825L8.0025 7.09249L12.8925 2.20249C13.2725 1.82249 13.2725 1.18249 12.8925 0.802486Z"
-      fill="var(--gray)"
+      fill={color}
     />
   </svg>
 );
@@ -106,3 +111,5 @@ export const useIntersectionObserver = (ref, options) => {
 
   return isIntersecting;
 };
+
+export const createId = () => Math.random().toString(16).slice(2);
