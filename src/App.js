@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { Bookmarks, Dashboard, Home, Login } from "./pages";
 import { useEffect } from "react";
 import { ProtectedRoute, Snackbar } from "./components";
+import { TableDataContext, Task } from "./pages/MultiSelect";
 
 const Redirect = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Redirect />} />
         <Route path="/login" element={<Login />} />
         <Route
@@ -36,7 +37,8 @@ function App() {
           <Route path="bookmark" element={<Bookmarks />} />
         </Route>
       </Routes>
-      <Snackbar />
+      <Snackbar /> */}
+      <Task />
     </div>
   );
 }
